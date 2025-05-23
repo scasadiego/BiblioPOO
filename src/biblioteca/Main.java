@@ -8,7 +8,6 @@ package biblioteca;
 import java.util.ArrayList;
 import usuarios.Estudiante;
 import usuarios.Profesor;
-import usuarios.Usuario;
 
 
 
@@ -30,6 +29,8 @@ public class Main {
                case 1:
                    userInterface.registrarUsuarios();
                    break;
+                case 2:
+
            }
                  
        }

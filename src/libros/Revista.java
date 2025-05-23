@@ -3,7 +3,7 @@ package libros;
 public class Revista implements Libro {
     private String name;
     private int ID;
-    private boolean state;
+    private boolean state=true;
     private String author;
     private String category="Revista";
     public Revista(String name,String author,int ID,boolean state){
@@ -36,7 +36,7 @@ public class Revista implements Libro {
     }
 
     @Override
-    public Boolean getState(){
+    public boolean getState(){
         return this.state;
     }
 
