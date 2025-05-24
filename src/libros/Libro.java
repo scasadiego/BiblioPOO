@@ -2,13 +2,13 @@ package libros;
 
 public interface Libro{
     String getName();
-    void setName();
+    void setName(String nombre);
     String getAuthor();
-    void setAuthor();
+    void setAuthor(String autor);
     boolean getState();
-    void setState();
+    void setState(boolean estado);
     String getCategory();
-    void setCategory();
+    void setCategory(String categoria);
     int getID();
-    void setID();
+    void setID(int ID);
 }

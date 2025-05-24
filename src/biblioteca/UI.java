@@ -1,25 +1,26 @@
 
 package biblioteca;
-import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.Scanner;
-import javax.naming.LinkRef;
+import libros.LibroB;
+import libros.Periodico;
+import libros.Revista;
 import usuarios.Estudiante;
 import usuarios.Profesor;
-import libros.Revista;
-import libros.Libro;
-import libros.Periodico;
-import libros.LibroB;
 /**
  *
  * @author Oscar
  */
 public class UI {
-    
+    private ArrayList<Revista> revistasDisponibles= new ArrayList<>();
+    private ArrayList<LibroB> librosDisponibles= new ArrayList<>();
+    private ArrayList<Periodico> periodicosDisponibles= new ArrayList<>();
     Scanner scanner= new Scanner (System.in);
     public int menu(){
-        System.out.println("Bienvenido a la biblioteca");
+        System.out.println("\nBienvenido a la biblioteca");
         System.out.println("1.Registrar Usuarios");
         System.out.println("2. Registrar libros");
+        System.out.println("3. Mostrar libros disponibles");
         int option = this.scanner.nextInt();
         
         return option;  
@@ -28,7 +29,7 @@ public class UI {
 
     
     public void registrarUsuarios(){
-        System.out.println("Eliga un item: ");
+        System.out.println("Elija un item: ");
         System.out.println("1.Estudiante");
         System.out.println("2.Profesor");
         
@@ -43,7 +44,7 @@ public class UI {
         switch(option){
             case 1:
                 Estudiante estudiante= new Estudiante(name, id);
-                System.out.println("Estudiane registrado");
+                System.out.println("Estudiante registrado");
                 break;
             case 2:
                 Profesor profesor= new Profesor(name, id);
@@ -52,55 +53,43 @@ public class UI {
         }
     }
 
-    public void registrarLibros(){
-        String nombre,autor;
-        int ID;
+    public void registrarLibros(){        
         System.out.println("Elija un tipo de libro: ");
         System.out.println("1. Revista");
         System.out.println("2. Libro");
         System.out.println("3. Periodico");
         int option= this.scanner.nextInt();
-
+        scanner.nextLine();
+        System.out.println("Ingrese el nombre del material: ");
+        String nombre=this.scanner.nextLine();
+        System.out.println("Ingrese el autor del material: ");
+        String autor=this.scanner.nextLine();
+        System.out.println("Ingrese el ID del material: ");
+        int ID=this.scanner.nextInt();
+        //Sacar todo ese texto de los case, preguntarlo antes y inicializar los cosos igual que como se hace en registrarUsuarios
         switch(option){
             case 1: 
-                Revista revista= new Revista();
-                System.out.println("Ingrese el nombre de la revista: ");
-                nombre=this.scanner.nextLine();
-                revista.setName(nombre);
-                System.out.println("Ingrese el autor de la revista: ");
-                autor=this.scanner.nextLine();
-                revista.setAuthor(autor);
-                System.out.println("Ingrese el ID de la revista");
-                ID=this.scanner.nextInt();
-                revista.setID(ID);
+                Revista revista= new Revista(nombre,autor,ID);
+                revistasDisponibles.add(revista);
+                System.out.println("La revista "+revista.getName()+" con autor "+revista.getAuthor()+" con ID "+revista.getID()+" fue registrada");
                 break;
             case 2:
-                LibroB libro= new LibroB();
-                System.out.println("Ingrese el nombre del libro: ");
-                nombre=this.scanner.nextLine();
-                libro.setName(nombre);
-                System.out.println("Ingrese el autor del libro: ");
-                autor=this.scanner.nextLine();
-                libro.setAuthor(autor);
-                System.out.println("Ingrese el ID del libro: ");
-                ID=this.scanner.nextInt();
-                libro.setID(ID);
+                LibroB libro= new LibroB(nombre,autor,ID);
+                librosDisponibles.add(libro);
+                System.out.println("El libro "+libro.getName()+" con autor "+libro.getAuthor()+" con ID "+libro.getID()+" fue registrado");             
                 break;
             case 3: 
-                Periodico periodico= new Periodico();
-                System.out.println("Ingrese el nombre del periodico: ");
-                nombre=this.scanner.nextLine();
-                periodico.setName(nombre);
-                System.out.println("Ingrese el autor del periodico: ");
-                autor=this.scanner.nextLine();
-                periodico.setAuthor(autor);
-                System.out.println("Ingrese el ID del periodico");
-                ID=this.scanner.nextInt();
-                periodico.setID(ID);
-
+                Periodico periodico= new Periodico(nombre,autor,ID);  
+                periodicosDisponibles.add(periodico);           
+                System.out.println("El periodico "+periodico.getName()+" con autor "+periodico.getAuthor()+" con ID "+periodico.getID()+" fue registrado");
+                break;
         }
     }
-    
+    public void mostrarDisponibles(){
+        for (int i=0;i<librosDisponibles.size();i++) {
+            System.out.println(librosDisponibles.get(i).getName());
+        }
+    }
      
     
 }

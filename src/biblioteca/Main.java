@@ -30,7 +30,11 @@ public class Main {
                    userInterface.registrarUsuarios();
                    break;
                 case 2:
-
+                    userInterface.registrarLibros();
+                    break;
+                case 3:
+                    userInterface.mostrarDisponibles();
+                    break;
            }
                  
        }

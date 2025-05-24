@@ -5,10 +5,10 @@ public class LibroB implements Libro{
     private boolean state=true;
     private String author;
     private String category="Libro";
-    public LibroB(String name,String author,int ID,boolean state){
+    public LibroB(String name,String author,int ID){
         this.name=name;
         this.ID=ID;
-        this.state=state;
+        this.state=true;
         this.author=author;
     }
     public LibroB(){

@@ -6,10 +6,10 @@ public class Periodico implements Libro {
     private boolean state=true;
     private String author;
     private String category="Periodico";
-    public Periodico(String name,String author,int ID,boolean state){
+    public Periodico(String name,String author,int ID){
         this.name=name;
         this.ID=ID;
-        this.state=state;
+        this.state=true;
         this.author=author;
     }
     public Periodico(){
@@ -19,7 +19,8 @@ public class Periodico implements Libro {
     public String getName(){
         return this.name;
     }
-
+    
+    @Override
     public void setName(String name){
         this.name=name;
     }
@@ -29,7 +30,7 @@ public class Periodico implements Libro {
         return this.author;
     }
 
-
+    @Override
     public void setAuthor(String author){
         this.author=author;
     }
@@ -39,7 +40,7 @@ public class Periodico implements Libro {
         return this.state;
     }
 
-
+    @Override
     public void setState(boolean state){
         this.state=state;
     }
@@ -49,7 +50,7 @@ public class Periodico implements Libro {
         return this.category;
     }
     
-
+    @Override
     public void setCategory(String category){
         this.category=category;
     }
@@ -59,7 +60,7 @@ public class Periodico implements Libro {
         return this.ID;
     }
 
-
+    @Override
     public void setID(int ID){
         this.ID=ID;
     }    
