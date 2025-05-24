@@ -85,9 +85,46 @@ public class UI {
                 break;
         }
     }
-    public void mostrarDisponibles(){
+
+    public void mostrarLibrosDisponibles(){
         for (int i=0;i<librosDisponibles.size();i++) {
-            System.out.println(librosDisponibles.get(i).getName());
+            if(librosDisponibles.get(i).getState()){
+                System.out.println(librosDisponibles.get(i).getName());
+            }        
+        }
+    }
+
+    public void mostrarRevistasDisponibles(){
+        for (int i=0;i<revistasDisponibles.size();i++) {
+            if(librosDisponibles.get(i).getState()){
+                System.out.println(revistasDisponibles.get(i).getName());
+            }
+        }
+    }
+
+    public void mostrarPeriodicosDisponibles(){
+        for (int i=0;i<periodicosDisponibles.size();i++) {
+            if(librosDisponibles.get(i).getState()){
+                System.out.println(periodicosDisponibles.get(i).getName());
+            }
+        }
+    }
+
+    public void mostrarDisponibles(){
+        System.out.println("1. Mostrar libros");
+        System.out.println("2. Mostrar revistas");
+        System.out.println("3. Mostrar periodicos");
+        int dispOption= this.scanner.nextInt();
+        switch(dispOption){
+            case 1:
+                mostrarLibrosDisponibles();
+                break;
+            case 2:
+                mostrarRevistasDisponibles();
+                break;
+            case 3:
+                mostrarPeriodicosDisponibles();
+                break;
         }
     }
      
