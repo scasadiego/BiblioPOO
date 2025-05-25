@@ -9,7 +9,8 @@ import usuarios.Estudiante;
 import usuarios.Profesor;
 import usuarios.Usuario;
 
-
+//Falta poner en false cuando se pida prestado un libro, imprimir tambien el ID del libro cuando se muestre en disponibles, al parecer cuando muestra los
+//disponibles de una vaina en el menu de prestamos, muestra todo, tambien poner algo para ver los prestamos de cada usuario
 
 
 /**
