@@ -18,8 +18,6 @@ public class Main {
      */
     public static void main(String[] args) {
        UI userInterface = new UI();
-       ArrayList<Estudiante> estudiantes = new ArrayList<>();
-       ArrayList<Profesor> profesores = new ArrayList<>();
        
        
        int option = 1;
@@ -28,12 +26,20 @@ public class Main {
            switch(option){
                case 1:
                    userInterface.registrarUsuarios();
+                   
                    break;
                 case 2:
-                    userInterface.registrarLibros();
+                    userInterface.mostrarUsuarios();
+
                     break;
                 case 3:
+                    userInterface.registrarLibros();
+                    break;
+                case 4:
                     userInterface.mostrarDisponibles();
+                    break;
+                case 5:
+                    userInterface.menuPrestamo();
                     break;
            }
                  
@@ -42,3 +48,5 @@ public class Main {
     }
     
 }
+
+

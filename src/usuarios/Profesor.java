@@ -1,6 +1,11 @@
 
 package usuarios;
 
+import java.util.ArrayList;
+import libros.LibroB;
+import libros.Periodico;
+import libros.Revista;
+
 /**
  *
  * @author Oscar
@@ -9,7 +14,11 @@ public class Profesor implements Usuario {
     
     private String nombre;
     private String id;
+    private ArrayList <LibroB> librosPrestados;
+    private ArrayList <Periodico> periodicosPrestados;
+    private ArrayList <Revista> revistasPrestadas;
     private int prestamosActuales = 0;
+    private final int MAXPRESTAMOS = 5;
     
     public Profesor(String nombre, String id) {
         this.nombre = nombre;
@@ -42,7 +51,7 @@ public class Profesor implements Usuario {
 
     @Override
     public int limitePrestamos() {
-        return 5;
+        return this.MAXPRESTAMOS;
     }
 
 
@@ -50,17 +59,24 @@ public class Profesor implements Usuario {
     public boolean puedePedirPrestamo() {
        return prestamosActuales < limitePrestamos(); 
     }
+    
+    @Override
+    public void prestamoLibro(LibroB libro){
+        this.librosPrestados.add(libro);
+        this.prestamosActuales++;
+    }
 
     @Override
-    public void pedirPrestamo() {
-         if (puedePedirPrestamo()) {
-            prestamosActuales++;
-            System.out.println(nombre + " pidió un préstamo. Total: " + prestamosActuales);
-        } else {
-            System.out.println(nombre + " alcanzó el límite de préstamos.");
-        }
+    public void prestamoRevista(Revista revista){
+        this.revistasPrestadas.add(revista);
+        this.prestamosActuales++;
     }
-    
+
+    @Override
+    public void prestamoPeriodico(Periodico periodico){
+        this.periodicosPrestados.add(periodico);
+        this.prestamosActuales++;
+    }
 
     @Override
     public void devolverPrestamo(){

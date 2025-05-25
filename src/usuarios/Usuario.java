@@ -3,6 +3,9 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
 package usuarios;
+import libros.LibroB;
+import libros.Periodico;
+import libros.Revista;
 
 /**
  *
@@ -13,7 +16,9 @@ public interface Usuario {
     void setName(String nombre);
     String getID();
     void setID(String id);
-    void pedirPrestamo();
+    void prestamoLibro(LibroB libro);
+    void prestamoRevista(Revista revista);
+    void prestamoPeriodico(Periodico periodico);
     void devolverPrestamo();
     int limitePrestamos();
     boolean puedePedirPrestamo();
