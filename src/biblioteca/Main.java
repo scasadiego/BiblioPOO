@@ -5,9 +5,7 @@
  */
 package biblioteca;
 
-import java.util.ArrayList;
-import usuarios.Estudiante;
-import usuarios.Profesor;
+
 
 
 
@@ -41,6 +39,11 @@ public class Main {
                 case 5:
                     userInterface.menuPrestamo();
                     break;
+                case 6:
+                    userInterface.menuDevolverMaterial();
+                    break;
+                case 7:
+                    userInterface.mostrarPrestamosActuales();
            }
                  
        }

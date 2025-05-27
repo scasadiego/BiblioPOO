@@ -3,9 +3,10 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
  */
 package usuarios;
-import libros.LibroB;
-import libros.Periodico;
-import libros.Revista;
+
+import java.util.ArrayList;
+
+import libros.Libro;
 
 /**
  *
@@ -16,14 +17,12 @@ public interface Usuario {
     void setName(String nombre);
     String getID();
     void setID(String id);
-    void prestamoLibro(LibroB libro);
-    void prestamoRevista(Revista revista);
-    void prestamoPeriodico(Periodico periodico);
-    void devolverPrestamo();
+    void devolverPrestamo(Libro material);
     int limitePrestamos();
     boolean puedePedirPrestamo();
     String tipoUser();
-    void consultarMaterial(/*Material material*/);
+    ArrayList<Libro> getMaterialesPrestados();
+    void agregarMaterialPrestado(Libro material);
     
     
 }

@@ -2,9 +2,12 @@
 package usuarios;
 
 import java.util.ArrayList;
+
+import libros.Libro;
 import libros.LibroB;
 import libros.Periodico;
 import libros.Revista;
+
 
 /**
  *
@@ -14,11 +17,13 @@ public class Estudiante implements Usuario{
     
     private String nombre;
     private String id;
-    private int prestamosActuales =0;
-    private ArrayList <LibroB> librosPrestados;
-    private ArrayList <Periodico> periodicosPrestados;
-    private ArrayList <Revista> revistasPrestadas;
+    
     private final int MAXPRESTAMOS=3;
+    private ArrayList<Libro> materialesPrestados = new ArrayList<>();
+    private ArrayList<LibroB> librosPrestados = new ArrayList<>();
+    private ArrayList<Revista> revistasPrestadas = new ArrayList<>();
+    private ArrayList<Periodico> periodicosPrestados = new ArrayList<>();
+
     public Estudiante(String nombre, String id) {
         this.nombre = nombre;
         this.id = id;
@@ -56,37 +61,19 @@ public class Estudiante implements Usuario{
 
     @Override
     public boolean puedePedirPrestamo() {
-       return prestamosActuales < limitePrestamos(); 
+       return materialesPrestados.size() < 3;
     }
 
-    @Override
-    public void prestamoLibro(LibroB libro){
-        this.librosPrestados.add(libro);
-        this.prestamosActuales++;
+    public void agregarMaterialPrestado(Libro material) {
+        materialesPrestados.add(material);
     }
 
-    @Override
-    public void prestamoRevista(Revista revista){
-        this.revistasPrestadas.add(revista);
-        this.prestamosActuales++;
-    }
+ 
 
-    @Override
-    public void prestamoPeriodico(Periodico periodico){
-        this.periodicosPrestados.add(periodico);
-        this.prestamosActuales++;
-    }
+   
 
-    @Override
-    public void devolverPrestamo(){
-        if (prestamosActuales > 0) {
-        prestamosActuales--;
-        System.out.println(nombre + " devolvió un material. Total: " + prestamosActuales);
-        //poner el material en el array de materiales
-        } 
-        else {
-        System.out.println(nombre + " no tiene préstamos para devolver.");
-        }
+    public void devolverPrestamo(Libro material) {
+        materialesPrestados.remove(material);
     }
 
 
@@ -97,10 +84,23 @@ public class Estudiante implements Usuario{
         return "Estudiante";
     }
 
-    @Override
-    public void consultarMaterial() {
-        System.out.println("mostrando material");
-        //mostrar array de todos los materiales
+    
+    public ArrayList<Libro> getMaterialesPrestados() {
+        return materialesPrestados;
+
     }
+
+    public ArrayList<LibroB> getLibrosPrestados() {
+        return librosPrestados;
+    }
+
+    public ArrayList<Revista> getRevistasPrestadas() {
+        return revistasPrestadas;
+    }
+
+    public ArrayList<Periodico> getPeriodicosPrestados() {
+        return periodicosPrestados;
+    }
+
     
 }

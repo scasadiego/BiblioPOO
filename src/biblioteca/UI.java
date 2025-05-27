@@ -2,6 +2,8 @@
 package biblioteca;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import libros.Libro;
 import libros.LibroB;
 import libros.Periodico;
 import libros.Revista;
@@ -32,6 +34,8 @@ public class UI {
         System.out.println("3. Registrar libros");
         System.out.println("4. Mostrar libros disponibles");
         System.out.println("5. Pedir Prestamo");
+        System.out.println("6. Devolver Prestamo");
+        System.out.println("7. Ver Prestamos Actuales");
         int option = this.scanner.nextInt();
         
         return option;  
@@ -138,7 +142,7 @@ public class UI {
     public void mostrarLibrosDisponibles(){
         for (int i=0;i<librosDisponibles.size();i++) {
             if(librosDisponibles.get(i).getState()){
-                System.out.println(i+1 +". "+librosDisponibles.get(i).getName());
+                System.out.println(librosDisponibles.get(i).getID()+". "+librosDisponibles.get(i).getName());
             }        
         }
     }
@@ -146,8 +150,8 @@ public class UI {
     //mostrar revistas
     public void mostrarRevistasDisponibles(){
         for (int i=0;i<revistasDisponibles.size();i++) {
-            if(librosDisponibles.get(i).getState()){
-                System.out.println(i+1 +". "+revistasDisponibles.get(i).getName());
+            if(revistasDisponibles.get(i).getState()){
+                System.out.println(revistasDisponibles.get(i).getID()+". "+revistasDisponibles.get(i).getName());
             }
         }
     }
@@ -156,9 +160,10 @@ public class UI {
     public void mostrarPeriodicosDisponibles(){
         for (int i=0;i<periodicosDisponibles.size();i++) {
             if(periodicosDisponibles.get(i).getState()){
-                System.out.println(i+1 +". "+periodicosDisponibles.get(i).getName());
+                System.out.println(periodicosDisponibles.get(i).getID()+". "+periodicosDisponibles.get(i).getName());
             }
         }
+
     }
 
     //interfaz para mostrar los materiales
@@ -251,7 +256,11 @@ public class UI {
                         for(int i=0;i<librosDisponibles.size();i++){
                             if(IDRegistrada==librosDisponibles.get(i).getID()){
                                 LibroB libro=librosDisponibles.get(i);
-                                usuarioEncontrado.prestamoLibro(libro);
+                                usuarioEncontrado.agregarMaterialPrestado(libro);
+                                librosDisponibles.remove(i);
+                                System.out.println("el prestamo se realizo exitosamente");
+
+
                             }
                         }
                         break;
@@ -259,7 +268,10 @@ public class UI {
                         for(int i=0;i<revistasDisponibles.size();i++){
                             if(IDRegistrada==revistasDisponibles.get(i).getID()){
                                 Revista revista=revistasDisponibles.get(i);
-                                usuarioEncontrado.prestamoRevista(revista);
+                                //aplicar array de pretamos
+                                usuarioEncontrado.agregarMaterialPrestado(revista);
+                                revistasDisponibles.remove(i);
+                                System.out.println("el prestamo se realizo exitosamente");
                             }
                         }
                         break;
@@ -267,7 +279,10 @@ public class UI {
                         for(int i=0;i<periodicosDisponibles.size();i++){
                             if(IDRegistrada==periodicosDisponibles.get(i).getID()){
                                 Periodico periodico=periodicosDisponibles.get(i);
-                                usuarioEncontrado.prestamoPeriodico(periodico);
+                                //aplicar array de pretamos
+                                usuarioEncontrado.agregarMaterialPrestado(periodico);
+                                periodicosDisponibles.remove(i);
+                                System.out.println("el prestamo se realizo exitosamente");
                             }
                         }
                         break;
@@ -282,5 +297,173 @@ public class UI {
         }
 
 
+    }
+
+        //DEVOLVER LOS PRESTAMOS
+        /*public void devolverMaterial(){
+            System.out.println("Bienvenido al menu de devolver materiales ");
+            System.out.println("Elige el indicador del tipo de usuario: ");
+            System.out.println("1. Estudiante:");
+            System.out.println("2. Profesor:");
+            int option= this.scanner.nextInt();
+            System.out.println("Escribe tu ID mostrado en la lista: ");
+            switch(option){
+                case 1:
+                    mostrarEstudiantes();
+                    break;
+                case 2:
+                    mostrarProfesores();
+                    break;
+            }
+                    scanner.nextLine();
+            
+                    String idEscogido = this.scanner.nextLine();
+
+            Usuario usuarioEncontrado = null;
+
+            switch(option) {
+                case 1:
+                    for (Estudiante est : estudiantesRegistrados) {
+                        if (est.getID().equals(idEscogido)) {
+                            usuarioEncontrado = est;
+                            break;
+                        }
+                    }
+                    break;
+                case 2:
+                    for (Profesor prof : profesoresRegistrados) {
+                        if (prof.getID().equals(idEscogido)) {
+                            usuarioEncontrado = prof;
+                            break;
+                        }
+                    }
+                    break;
+            }
+
+        }*/
+    public void menuDevolverMaterial() {
+        System.out.println("Ingrese el tipo de usuario:");
+        System.out.println("1. Estudiante");
+        System.out.println("2. Profesor");
+        int tipoUsuario = scanner.nextInt();
+        scanner.nextLine();
+
+        System.out.println("Ingrese su ID:");
+        switch(tipoUsuario){
+            case 1:
+                mostrarEstudiantes();
+                break;
+            case 2:
+                mostrarProfesores();
+                break;
         }
+        String id = scanner.nextLine();
+
+        Usuario usuario = null;
+
+        if (tipoUsuario == 1) {
+            for (Estudiante est : estudiantesRegistrados) {
+                if (est.getID().equals(id)) {
+                    usuario = est;
+                    break;
+                }
+            }
+        } else if (tipoUsuario == 2) {
+            for (Profesor prof : profesoresRegistrados) {
+                if (prof.getID().equals(id)) {
+                    usuario = prof;
+                    break;
+                }
+            }
+        }
+
+        if (usuario == null) {
+            System.out.println("Usuario no encontrado.");
+            return;
+        }
+
+        ArrayList<Libro> prestados = usuario.getMaterialesPrestados();
+        if (prestados.isEmpty()) {
+            System.out.println("No tienes materiales prestados.");
+            return;
+        }
+
+        System.out.println("Tus materiales prestados:");
+        for (Libro m : prestados) {
+            System.out.println(m.getID() + ". " + m.getName());
+        }
+
+        System.out.println("Ingresa el ID del material a devolver:");
+        int idMaterial = scanner.nextInt();
+
+        Libro aDevolver = null;
+        for (Libro m : prestados) {
+            if (m.getID() == idMaterial) {
+                aDevolver = m;
+                break;
+            }
+        }
+
+        if (aDevolver != null) {
+            usuario.devolverPrestamo(aDevolver);
+
+            // Volverlo a su lista de disponibles
+            if (aDevolver instanceof LibroB) {
+                librosDisponibles.add((LibroB) aDevolver);
+            }
+            else if (aDevolver instanceof Revista){ 
+                revistasDisponibles.add((Revista) aDevolver);
+            }
+            else if (aDevolver instanceof Periodico){
+                periodicosDisponibles.add((Periodico) aDevolver);
+            }    
+            System.out.println("Material devuelto correctamente.");
+            } else {
+                System.out.println("No tienes un material con ese ID.");
+            }
+        }
+
+    // VER LOS PRESTAMOS ACTUALES
+    public void mostrarPrestamosActuales() {
+        System.out.println("---- Préstamos actuales ----");
+
+        for (Estudiante est : estudiantesRegistrados) {
+            if (!est.getMaterialesPrestados().isEmpty()) {
+                System.out.println(est.getName() + " (Estudiante)" + est.getMaterialesPrestados().size() + " materiales:");
+
+                for (LibroB libro : est.getLibrosPrestados()) {
+                    System.out.println("   - Libro: " + libro.getName() + " (ID: " + libro.getID() + ")");
+                }
+
+                for(Revista revista : est.getRevistasPrestadas()) {
+                    System.out.println("   - Revista: " + revista.getName() + " (ID: " + revista.getID() + ")");
+                }
+
+                for (Periodico periodico : est.getPeriodicosPrestados()) {
+                    System.out.println("   - Periódico: " + periodico.getName() + " (ID: " + periodico.getID() + ")");
+                }
+            }
+        }
+
+        for (Profesor prof : profesoresRegistrados) {
+            if (!prof.getMaterialesPrestados().isEmpty()) {
+                System.out.println(prof.getName() + " (Profesor)" + prof.getMaterialesPrestados().size() + " materiales:");
+
+                for (LibroB libro : prof.getLibrosPrestados()) {
+                    System.out.println("   - Libro: " + libro.getName() + " (ID: " + libro.getID() + ")");
+                }
+
+                for (Revista revista : prof.getRevistasPrestadas()) {
+                    System.out.println("   - Revista: " + revista.getName() + " (ID: " + revista.getID() + ")");
+                }
+
+                for (Periodico periodico : prof.getPeriodicosPrestados()) {
+                    System.out.println("   - Periódico: " + periodico.getName() + " (ID: " + periodico.getID() + ")");
+                }
+            }
+        }
+    }
+
+
+
 }
