@@ -2,7 +2,6 @@
 package usuarios;
 
 import java.util.ArrayList;
-
 import libros.Libro;
 import libros.LibroB;
 import libros.Periodico;
@@ -65,12 +64,13 @@ public class Profesor implements Usuario {
        return materialesPrestados.size() < 5; 
     }
 
+    @Override
     public void agregarMaterialPrestado(Libro material) {
         materialesPrestados.add(material);
     }    
     
 
-    
+    @Override    
     public void devolverPrestamo(Libro material) {
         materialesPrestados.remove(material);
     }
@@ -84,7 +84,7 @@ public class Profesor implements Usuario {
     public String tipoUser() {
         return "Profesor";
     }
-
+    @Override
     public ArrayList<Libro> getMaterialesPrestados() {
         return materialesPrestados;
 
