@@ -19,16 +19,14 @@ public class Main {
        
        
        int option = 1;
-       while(option != 0){
+       while(option>0 && option<8){
             option = userInterface.menu();
            switch(option){
                case 1:
-                   userInterface.registrarUsuarios();
-                   
+                   userInterface.registrarUsuarios();                 
                    break;
                 case 2:
                     userInterface.mostrarUsuarios();
-
                     break;
                 case 3:
                     userInterface.registrarLibros();
@@ -44,6 +42,11 @@ public class Main {
                     break;
                 case 7:
                     userInterface.mostrarPrestamosActuales();
+                    break;
+                case 8:
+                    System.out.println("Hasta luego, tenga un buen día ");
+                    break;
+
            }
                  
        }

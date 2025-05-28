@@ -2,7 +2,6 @@
 package biblioteca;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import libros.Libro;
 import libros.LibroB;
 import libros.Periodico;
@@ -36,6 +35,7 @@ public class UI {
         System.out.println("5. Pedir Prestamo");
         System.out.println("6. Devolver Prestamo");
         System.out.println("7. Ver Prestamos Actuales");
+        System.out.println("8.Salir de la biblioteca");
         int option = this.scanner.nextInt();
         
         return option;  
@@ -347,8 +347,6 @@ public class UI {
         System.out.println("2. Profesor");
         int tipoUsuario = scanner.nextInt();
         scanner.nextLine();
-
-        System.out.println("Ingrese su ID:");
         switch(tipoUsuario){
             case 1:
                 mostrarEstudiantes();
@@ -357,6 +355,7 @@ public class UI {
                 mostrarProfesores();
                 break;
         }
+        System.out.println("Ingrese su ID:");
         String id = scanner.nextLine();
 
         Usuario usuario = null;
